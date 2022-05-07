@@ -1,5 +1,14 @@
+const { send } = require("express/lib/response");
 const pool = require("../db");
 const httpError = require("../helpers/handleError");
+
+const getFrontend = (req, res) => {
+  try {
+    res.sendFile(path.join(__dirname, '../../../frontend/build', 'index.html'));
+  } catch (e) {
+    httpError(res, e);
+  }
+};
 
 const getMovies = async (req, res) => {
   try {
@@ -74,4 +83,5 @@ module.exports = {
   createMovie,
   updateMovie,
   deleteMovie,
+  getFrontend
 };
